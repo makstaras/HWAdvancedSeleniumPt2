@@ -57,8 +57,11 @@ namespace HWAdvancedSeleniumPt2
 
                 var lastImage = driver.FindElements(By.XPath("//*[@id='gridMulti']/div[1]//a/div/img")).Last();
                 new Actions(driver).MoveToElement(lastImage).Perform();
-                driver.FindElements(By.CssSelector("#gridMulti > div:nth-child(1) a > span > svg > path")).Last().Click();
-
+                lastImage.Click();
+                var download = driver.FindElement(By.XPath("//span[text()='Download free']"));
+                
+                jexec.ExecuteScript($"arguments[0].click()", download);
+                
                 Assert.That(driver.FindElement(By.ClassName("_3Gbbu")).Text, Is.EqualTo("Say thanks"));              
             }
             
